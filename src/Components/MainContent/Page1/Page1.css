@@ -1,0 +1,124 @@
+.main-section {
+    height: 100vh;
+    display: flex;
+}
+
+.left-panel {
+    flex: 1;
+    background-size: cover; /* Zachowaj pełne pokrycie */
+    background-position: center;
+    background-repeat: no-repeat;
+    transition: all 0.3s ease; /* Płynne przejście rozmiaru */
+    height: 100vh;
+    min-width: 40%;
+    max-width: 40%;
+}
+
+.right-panel {
+    display: flex;
+    flex-direction: column;
+    justify-content: end;
+}
+
+.right-panel-up {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    height: 45%;
+    justify-content: center;
+}
+
+.right-panel-up h2 {
+    font-size: 64px;
+    color: #F8FAFF;
+}
+
+#my-description {
+    display: flex;
+    flex-direction: row;
+    position: relative;
+}
+
+#my-description p {
+    padding-left: 3vw;
+    padding-right: 3vw;
+    padding-top: 5vh;
+    color: #F8FAFF;
+    font-weight: 400;
+    font-size: 16px;
+    z-index: 2;
+}
+
+.right-panel-down {
+    background-color: #AFB8A8;
+    height: 35%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+}
+
+.my-description-background {
+    background-color: #000000;
+    opacity: 0.5;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    position: absolute;
+    display: none;
+    z-index: 1;
+    border-radius: 20px;
+}
+
+@media (max-width: 1200px) {
+    #my-description {
+        flex-direction: column;
+    }
+    #my-description p {
+        padding-top: 2vh;
+    }
+}
+
+@media (max-width: 900px) {
+    .left-panel {
+        position: absolute;
+        min-width: 100%;
+    }
+    .right-panel {
+        position: relative;
+        display: flex;
+    }
+    .right-panel-down {
+        max-height: 10%;
+        background-color: #000000;
+    }
+    .right-panel-up {
+        height: 90%;
+        justify-content: center;
+    }
+    .my-description-background {
+        display: flex;
+        margin: 3vw;
+    }
+    #my-description p {
+        position: relative;
+        padding-left: 5vw;
+        padding-right: 5vw;
+    }
+    #my-description p:first-of-type {
+        padding-top: 5vw;
+    }
+    #my-description p:last-of-type {
+        padding-bottom: 5vw;
+    }
+}
+
+@media (max-width: 500px) {
+    #my-description p {
+        font-size: 14px;
+    }
+    .right-panel-up h2 {
+        font-size: 48px;
+    }
+}

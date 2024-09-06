@@ -1,0 +1,168 @@
+.navbar {
+    margin: 30px 30px 0 30px;
+    border-radius: 30px;
+    color: #F8FAFF;
+    background-color: #000000 !important; /* Ważne, aby nadpisać Bootstrapowe tło */
+    box-shadow: 0 10px 20px 0 rgba(121, 121, 121, 0.1);
+}
+
+#logo2 {
+    padding-left: 30px;
+    font-weight: 300;
+    font-size: 24px;
+    display: flex;
+    align-items: center;
+    color: #F8FAFF;
+}
+
+#sign {
+    font-weight: 500;
+    margin-left: 10px;
+    color: #AFB8A8;
+}
+
+.navbar-nav {
+    list-style: none;
+    display: flex;
+    align-items: center;
+}
+
+.navbar-nav .nav-item {
+    margin: 0 45px; /* Zmniejszone dla lepszego wyglądu */
+    position: relative;
+}
+
+.navbar-nav .nav-link {
+    position: relative;
+    color: #F8FAFF !important;
+    font-size: 24px !important;
+    font-weight: 300 !important;
+    cursor: pointer;
+    padding-bottom: 7px;
+}
+
+.navbar-nav .nav-link::after {
+    content: '';
+    position: absolute;
+    left: -10px;
+    right: -10px;
+    bottom: 0;
+    height: 5px;
+    background-color: #F8FAFF;
+    clip-path: polygon(10% 0%, 100% 0%, 90% 100%, 0% 100%);
+    transform: scaleX(0);
+    transition: transform 0.3s ease;
+    transform-origin: center;
+}
+
+.navbar-nav .nav-link.active {
+    font-weight: 400 !important;
+}
+
+.navbar-nav .nav-link:hover::after,
+.navbar-nav .nav-link.active::after {
+    transform: scaleX(1);
+}
+
+.navbar-nav .nav-link:hover {
+    font-weight: 600;
+}
+
+
+.navbar-toggler-icon {
+    filter: invert(100%);
+}
+
+/* Zmiany dla responsywności */
+@media (max-width: 1400px) {
+    #logo2 {
+        display: none !important;
+    }
+}
+
+@media (max-width: 1200px) {
+    #logo2 {
+        display: flex !important;
+    }
+    .navbar-nav .nav-link::after {
+        height: 0;
+    }
+}
+
+@media (max-width: 600px) {
+    #logo2 {
+        font-size: 20px;
+    }
+    #logo1 {
+        max-height: 60px;
+    }
+    .navbar-nav .nav-link {
+        font-size: 20px !important;
+    }
+}
+@media (max-width: 500px) {
+    #logo2 {
+        font-size: 16px;
+    }
+    #logo1 {
+        max-height: 50px;
+    }
+    .navbar-nav .nav-link {
+        font-size: 16px !important;
+    }
+    .navbar-toggler-icon {
+        height: 24px !important;
+        width: 24px !important;
+    }
+}
+@media (max-width: 450px) {
+    #logo2 {
+        font-size: 14px;
+    }
+    #logo1 {
+        max-height: 40px;
+    }
+    .navbar-nav .nav-link {
+        font-size: 14px !important;
+    }
+    .navbar-toggler-icon {
+        height: 20px !important;
+        width: 20px !important;
+    }
+}
+@media (max-width: 389px) {
+    #logo2 {
+        font-size: 12px;
+    }
+    #logo1 {
+        max-height: 40px;
+    }
+    .navbar-nav .nav-link {
+        font-size: 12px !important;
+    }
+    .navbar-toggler-icon {
+        height: 20px !important;
+        width: 20px !important;
+    }
+}
+@media (max-width: 370px) {
+    #logo2 {
+        font-size: 12px;
+    }
+    #logo1 {
+        max-height: 35px;
+    }
+    .navbar-nav .nav-link {
+        font-size: 12px !important;
+    }
+    .navbar-toggler-icon {
+        height: 20px !important;
+        width: 20px !important;
+    }
+}
+/* Ustawienie wyrównania nawigacji na szerokich ekranach */
+@media (min-width: 1200px) {
+    .navbar-expand-xl .navbar-collapse {
+        justify-content: flex-end; /* Poprawione wyrównanie do prawej */
+    }
+}

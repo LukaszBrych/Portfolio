@@ -1,0 +1,136 @@
+.main-section-4 {
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+.main-section-4 .top-panel {
+    background-color: #AFB8A8;
+    height: 18vh;
+}
+
+.main-section-4 .down-panel {
+    display: flex;
+    width: 80%;
+    height: 82vh;
+    justify-content: space-between;
+}
+
+.down-panel h2 {
+    font-size: 64px;
+    color: #F8FAFF;
+    font-weight: 400;
+}
+
+.down-panel h3 {
+    font-size: 48px;
+    font-weight: 600;
+    color: #AFB8A8;
+}
+
+.contact-outside {
+    display: flex;
+    justify-content: center;
+}
+
+.left-panel-contact {
+    width: 70%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.contact-description {
+    font-weight: 400;
+    font-size: 16px;
+    color: #F8FAFF;
+    width: 60%;
+}
+
+.right-panel-contact a {
+    font-weight: 400;
+    font-size: 16px;
+    color: #AFB8A8 !important;
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+}
+
+.right-panel-contact a:hover:first-of-type {
+    color: #727A6B !important;
+}
+
+.right-panel-contact a:hover:last-of-type {
+    color: #727A6B !important;
+}
+
+.right-panel-contact a img {
+    margin-right: 1vw;
+}
+
+.right-panel-contact {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+@media (max-width: 1000px) {
+    .main-section-4 h2 {
+        font-size: 55px;
+    }
+    .main-section-4 h3 {
+        font-size: 40px;
+    }
+}
+
+@media (max-width: 900px) {
+    .main-section-4 .down-panel {
+        flex-direction: column;
+        justify-content: space-evenly;
+    }
+    .left-panel-contact {
+        width: 100%;
+    }
+    .contact-description {
+        width: 100%;
+    }
+}
+
+@media (max-width: 600px) {
+    .main-section-4 .top-panel {
+        height: 16vh;
+    }
+    .main-section-4 .down-panel {
+        height: 84vh;
+    }
+    .main-section-4 h2 {
+        font-size: 50px;
+    }
+    .main-section-4 h3 {
+        font-size: 36px;
+    }
+}
+
+@media (max-width: 500px) {
+    .main-section-4 h2 {
+        font-size: 46px;
+    }
+    .main-section-4 h3 {
+        font-size: 30px;
+    }
+    .contact-description {
+        font-size: 14px;
+    }
+    .right-panel-contact a {
+        font-size: 14px;
+    }
+}
+
+@media (max-width: 400px) {
+    .main-section-4 h2 {
+        font-size: 40px;
+    }
+    .main-section-4 h3 {
+        font-size: 24px;
+    }
+}

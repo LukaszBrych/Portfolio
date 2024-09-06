@@ -1,0 +1,146 @@
+.carousel-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 80%;
+    margin: 0 auto;
+    position: relative;
+    height: 23vw; /* Wysokość kontenera */
+}
+
+.carousel {
+    display: flex;
+    overflow: hidden;
+    width: 100%;
+    height: auto; /* Dopasuj wysokość do kontenera */
+    justify-content: center;
+}
+
+.carousel-item {
+    flex: auto;
+    box-sizing: border-box;
+    padding: 10px;
+    text-align: center;
+    height: 100%; /* Wysokość do wypełnienia kontenera */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin-right: 0;
+    min-width: 33.333%;
+}
+
+.carousel-item img {
+    width: 23vw;
+    height: auto; /* Dopasuj wysokość do proporcji obrazu */
+    max-height: 100%; /* Maksymalna wysokość */
+    object-fit: cover; /* Dopasuj obraz do kontenera */
+    position: absolute;
+}
+
+.caption {
+    font-size: 32px;
+    font-weight: 600;
+    color: white;
+    position: relative;
+    display: flex;
+    padding-bottom: 1vw;
+    max-width: 80%;
+    line-height: 1.2;
+    transition: padding-bottom 0.3s ease;
+}
+
+.caption-photo-outside {
+    width: 100%;
+    height: 23vw;
+    display: flex;
+    justify-content: center;
+    align-items: flex-end;
+}
+
+.caption-photo-outside img {
+    transition: filter 0.3s ease;
+}
+
+.caption-photo-outside:hover .caption {
+    padding-bottom: 2vw;
+}
+
+.caption-photo-outside img:hover {
+    filter: brightness(0.7);
+}
+
+.arrow {
+    background: transparent;
+    border: none;
+    padding: 0;
+    cursor: pointer;
+    z-index: 1;
+    position: absolute;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.arrow img {
+    width: 5vw; /* lub inna odpowiednia wielkość */
+    height: auto;
+}
+
+.arrow.left {
+    left: -7vw;
+}
+
+.arrow.right {
+    right: -7vw;
+}
+@media (max-width: 1500px) {
+    .caption {
+        font-size: 24px;
+    }
+}
+
+@media (max-width: 1200px) {
+    .caption {
+        font-size: 20px;
+    }
+}
+
+@media (max-width: 900px) {
+    .carousel-item {
+        min-width: 100%;
+    }
+    .carousel-item img {
+        width: 70vw;
+    }
+    .carousel-container {
+        height: 70vw;
+    }
+    .arrow img {
+        width: 10vw; /* Większe strzałki na małych ekranach */
+    }
+    .caption {
+        font-size: 32px;
+    }
+    .caption-photo-outside {
+        height: 70vw;
+    }
+}
+
+@media (max-width: 600px) {
+    .caption {
+        font-size: 28px;
+    }
+}
+
+@media (max-width: 500px) {
+    .caption {
+        font-size: 24px;
+    }
+}
+
+@media (max-width: 500px) {
+    .caption {
+        font-size: 20px;
+    }
+}
