@@ -19,6 +19,7 @@ const Page3 = () => {
     ];
     return (
         <div className="main-section-3">
+            <div className="top-top-panel"></div>
             <div className="top-panel">
                 <div className="graphic-designs-description-outside">
                     <div className="title-outside">
@@ -44,6 +45,9 @@ const Page3 = () => {
                     leftArrowHoverSrc={LeftArrowHover}
                     rightArrowHoverSrc={RightArrowHover}
                     imageStyle={{borderRadius: '30px'}}
+                    popupStyles={{
+                        backgroundColor: '#AFB8A8'
+                    }}
                 />
             </div>
         </div>

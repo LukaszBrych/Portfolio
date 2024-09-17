@@ -12,7 +12,9 @@ import Test from '/src/assets/test.png';
 const Page2 = () => {
 
     const images = [
-        {id: 1, src: GymDesignThumbnail, alt: 'Image 1', caption: 'System obsługi siłowni'},
+        {id: 1, src: GymDesignThumbnail, alt: 'Image 1', caption: 'System obsługi siłowni', description: 'chuj', additionalImages: [
+                {src: ShopDesignThumbnail, alt: 'Image1.2'}
+            ]},
         {id: 2, src: ShopDesignThumbnail, alt: 'Image 2', caption: 'Sklep internetowy'},
         {id: 3, src: HotelDesignThumbnail, alt: 'Image 3', caption: 'Strona hotelowa'},
         {id: 4, src: Test, alt: 'Image 4', caption: 'Caption 4'},
@@ -23,6 +25,7 @@ const Page2 = () => {
 
     return (
         <div className="main-section-2">
+            <div className="top-panel"></div>
             <div className="UI-designs-description-outside">
                 <h2>PROJEKTY UI</h2>
                 <div className="UI-designs-description">
@@ -41,6 +44,9 @@ const Page2 = () => {
                     rightArrowSrc={RightArrow}
                     leftArrowHoverSrc={LeftArrowHover}
                     rightArrowHoverSrc={RightArrowHover}
+                    popupStyles={{
+                        backgroundColor: '#000000'
+                    }}
                 />
             </div>
         </div>

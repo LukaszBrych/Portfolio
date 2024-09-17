@@ -3,7 +3,10 @@
     background-color: #AFB8A8;
     display: flex;
     flex-direction: column;
-    justify-content: flex-end;
+}
+
+.main-section-3 .top-top-panel {
+    height: 18vh;
 }
 
 .main-section-3 h2 {

@@ -68,6 +68,7 @@
 
 .caption-photo-outside img:hover {
     filter: brightness(0.7);
+    cursor: pointer;
 }
 
 .arrow {
