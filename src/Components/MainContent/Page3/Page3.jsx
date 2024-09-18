@@ -11,10 +11,10 @@ import DeerThumbnail from '/src/assets/deer-thumbnail.png';
 
 const Page3 = () => {
     const images = [
-        {id: 1, src: PandaThumbnail, alt: 'Image 1', caption: ''},
-        {id: 2, src: HumanThumbnail, alt: 'Image 2', caption: ''},
-        {id: 3, src: OwlThumbnail, alt: 'Image 3', caption: ''},
-        {id: 4, src: DeerThumbnail, alt: 'Image 4', caption: ''},
+        {id: 1, src: PandaThumbnail, alt: 'Image 1', caption: '', mainImage: PandaThumbnail, additionalImages: ''},
+        {id: 2, src: HumanThumbnail, alt: 'Image 2', caption: '', mainImage:HumanThumbnail},
+        {id: 3, src: OwlThumbnail, alt: 'Image 3', caption: '', mainImage: OwlThumbnail},
+        {id: 4, src: DeerThumbnail, alt: 'Image 4', caption: '', mainImage: DeerThumbnail},
         // Dodaj więcej obrazów według potrzeby
     ];
     return (
@@ -46,7 +46,8 @@ const Page3 = () => {
                     rightArrowHoverSrc={RightArrowHover}
                     imageStyle={{borderRadius: '30px'}}
                     popupStyles={{
-                        backgroundColor: '#AFB8A8'
+                        backgroundColor: '#AFB8A8',
+                        overflow: 'hidden'
                     }}
                 />
             </div>

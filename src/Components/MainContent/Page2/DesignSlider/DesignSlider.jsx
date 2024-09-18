@@ -45,6 +45,7 @@ const DesignSlider = ({
         setSelectedImage(null); // Wyzeruj wybrane zdjęcie
     };
 
+
     return (
         <div className="carousel-container">
             <button
