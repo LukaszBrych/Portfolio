@@ -8,33 +8,37 @@ import PandaThumbnail from  '/src/assets/panda-thumbnail.png';
 import HumanThumbnail from '/src/assets/human-thumbnail.png';
 import OwlThumbnail from '/src/assets/owl-thumbnail.png';
 import DeerThumbnail from '/src/assets/deer-thumbnail.png';
+import {SECTIONS} from '../../../data/siteSeo.js';
+import {useLanguage} from '../../../i18n/LanguageContext.jsx';
+import {useMemo} from 'react';
+
+const graphicSources = [PandaThumbnail, HumanThumbnail, OwlThumbnail, DeerThumbnail];
 
 const Page3 = () => {
-    const images = [
-        {id: 1, src: PandaThumbnail, alt: 'Image 1', caption: '', mainImage: PandaThumbnail, additionalImages: ''},
-        {id: 2, src: HumanThumbnail, alt: 'Image 2', caption: '', mainImage:HumanThumbnail},
-        {id: 3, src: OwlThumbnail, alt: 'Image 3', caption: '', mainImage: OwlThumbnail},
-        {id: 4, src: DeerThumbnail, alt: 'Image 4', caption: '', mainImage: DeerThumbnail},
-        // Dodaj więcej obrazów według potrzeby
-    ];
+    const {t} = useLanguage();
+
+    const images = useMemo(() => t.graphics.items.map((work, index) => ({
+        id: index + 1,
+        src: graphicSources[index],
+        alt: work.alt,
+        caption: '',
+        title: work.title,
+        description: work.description,
+        mainImage: graphicSources[index],
+    })), [t.graphics.items]);
+
     return (
         <div className="main-section-3">
             <div className="top-top-panel"></div>
             <div className="top-panel">
                 <div className="graphic-designs-description-outside">
                     <div className="title-outside">
-                        <h2>RYSUNKI GRAFICZNE</h2>
+                        <h2 id={SECTIONS.graphics.headingId}>{t.graphics.heading}</h2>
                         <div className="underline"></div>
                     </div>
-                    <div className="graphic-designs-description">
-                        Lorem ipsum dolor sit amet consectetur. Quam quisque vel ac tempus nulla nisi. Luctus adipiscing
-                        faucibus est varius risus purus sit cras in. Non aenean eu enim laoreet mollis nisl. Posuere
-                        mollis
-                        aliquam morbi ut leo eu vel. Lorem ipsum dolor sit amet consectetur. Quam quisque vel ac tempus
-                        nulla
-                        nisi. Luctus adipiscing faucibus est varius risus purus sit cras in. Lorem ipsum dolor sit amet
-                        consectetur.
-                    </div>
+                    <p className="graphic-designs-description">
+                        {t.graphics.description}
+                    </p>
                 </div>
             </div>
             <div className="design-slider-outside">
@@ -44,10 +48,9 @@ const Page3 = () => {
                     rightArrowSrc={RightArrow}
                     leftArrowHoverSrc={LeftArrowHover}
                     rightArrowHoverSrc={RightArrowHover}
-                    imageStyle={{borderRadius: '30px'}}
+                    variant="graphics"
                     popupStyles={{
                         backgroundColor: '#AFB8A8',
-                        overflow: 'hidden'
                     }}
                 />
             </div>

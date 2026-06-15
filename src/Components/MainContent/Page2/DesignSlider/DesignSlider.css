@@ -1,27 +1,66 @@
 .carousel-container {
     display: flex;
+    flex-direction: column;
     align-items: center;
     justify-content: center;
-    width: 80%;
+    width: min(92%, 1100px);
     margin: 0 auto;
     position: relative;
-    height: 23vw; /* Wysokość kontenera */
+    height: clamp(160px, 20vw, 300px);
+    padding: 0 clamp(2rem, 5vw, 3.5rem);
+}
+
+.carousel-container--graphics {
+    height: clamp(180px, 22vw, 320px);
+    overflow: visible;
+    padding-top: clamp(0.5rem, 1.5vh, 1rem);
+    padding-bottom: clamp(1.25rem, 3vh, 2rem);
 }
 
 .carousel {
     display: flex;
     overflow: hidden;
     width: 100%;
-    height: auto; /* Dopasuj wysokość do kontenera */
+    height: 100%;
     justify-content: center;
+}
+
+.carousel-slide-next {
+    animation: carouselSlideNext 0.48s var(--ease-out);
+}
+
+.carousel-slide-prev {
+    animation: carouselSlidePrev 0.48s var(--ease-out);
+}
+
+@keyframes carouselSlideNext {
+    from {
+        opacity: 0.55;
+        transform: translateX(18px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+@keyframes carouselSlidePrev {
+    from {
+        opacity: 0.55;
+        transform: translateX(-18px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
 }
 
 .carousel-item {
     flex: auto;
     box-sizing: border-box;
-    padding: 10px;
+    padding: clamp(3px, 0.6vw, 8px);
     text-align: center;
-    height: 100%; /* Wysokość do wypełnienia kontenera */
+    height: 100%;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -31,117 +70,389 @@
 }
 
 .carousel-item img {
-    width: 23vw;
-    height: auto; /* Dopasuj wysokość do proporcji obrazu */
-    max-height: 100%; /* Maksymalna wysokość */
-    object-fit: cover; /* Dopasuj obraz do kontenera */
-    position: absolute;
-}
-
-.caption {
-    font-size: 32px;
-    font-weight: 600;
-    color: white;
-    position: relative;
-    display: flex;
-    padding-bottom: 1vw;
-    max-width: 80%;
-    line-height: 1.2;
-    transition: padding-bottom 0.3s ease;
-}
-
-.caption-photo-outside {
     width: 100%;
-    height: 23vw;
-    display: flex;
-    justify-content: center;
-    align-items: flex-end;
-}
-
-.caption-photo-outside img {
-    transition: filter 0.3s ease;
-}
-
-.caption-photo-outside:hover .caption {
-    padding-bottom: 2vw;
-}
-
-.caption-photo-outside img:hover {
-    filter: brightness(0.7);
-    cursor: pointer;
-}
-
-.arrow {
-    background: transparent;
-    border: none;
-    padding: 0;
-    cursor: pointer;
-    z-index: 1;
+    max-width: clamp(100px, 16vw, 260px);
+    height: auto;
+    max-height: 100%;
+    object-fit: cover;
     position: absolute;
-    display: flex;
+    left: 50%;
+    bottom: 0;
+    transform: translateX(-50%);
+    transition: transform var(--transition-medium), filter var(--transition-fast);
+}
+
+.carousel--graphics {
+    overflow: visible;
+}
+
+.carousel--graphics .carousel-item {
+    padding: clamp(4px, 0.7vw, 10px);
     align-items: center;
     justify-content: center;
 }
 
+.carousel--graphics .caption-photo-outside {
+    width: auto;
+    height: 100%;
+    max-width: 100%;
+    aspect-ratio: 1;
+    max-height: none;
+    border-radius: clamp(16px, 2vw, 30px);
+    box-shadow: var(--shadow-soft);
+    background-color: #ffffff;
+    transition: transform var(--transition-medium), box-shadow var(--transition-medium);
+}
+
+.carousel--graphics .caption-photo-outside::before {
+    display: none;
+}
+
+.carousel--graphics .carousel-item img {
+    position: absolute;
+    inset: 0;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    width: 100%;
+    height: 100%;
+    max-width: none;
+    max-height: none;
+    object-fit: contain;
+    object-position: center;
+    border-radius: inherit;
+    transform: none;
+    filter: none;
+    transition: transform var(--transition-medium), filter var(--transition-fast);
+}
+
+.carousel--graphics .caption-photo-outside:hover {
+    transform: translateY(-8px);
+    box-shadow: var(--shadow-lift);
+}
+
+.carousel--graphics .caption-photo-outside:hover img {
+    transform: scale(1.04);
+    filter: brightness(0.92);
+}
+
+.caption {
+    font-size: clamp(0.8125rem, 1vw + 0.4rem, 1.375rem);
+    font-weight: 600;
+    color: white;
+    position: relative;
+    display: flex;
+    padding-bottom: clamp(0.2rem, 0.6vw, 0.6rem);
+    max-width: 92%;
+    line-height: 1.2;
+    transition: padding-bottom var(--transition-fast), transform var(--transition-fast);
+    text-align: center;
+    word-break: break-word;
+    z-index: 2;
+}
+
+.caption-photo-outside {
+    width: 100%;
+    height: 100%;
+    max-height: clamp(160px, 20vw, 300px);
+    display: flex;
+    justify-content: center;
+    align-items: flex-end;
+    position: relative;
+    border-radius: clamp(10px, 1.2vw, 16px);
+    overflow: hidden;
+    cursor: pointer;
+    box-shadow: var(--shadow-soft);
+    transition: transform var(--transition-medium), box-shadow var(--transition-medium);
+}
+
+.caption-photo-outside::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to top, rgba(0, 0, 0, 0.62) 0%, rgba(0, 0, 0, 0.08) 52%, transparent 100%);
+    opacity: 0.85;
+    transition: opacity var(--transition-fast);
+    z-index: 1;
+    pointer-events: none;
+}
+
+.caption-photo-outside:hover {
+    transform: translateY(-8px);
+    box-shadow: var(--shadow-lift);
+}
+
+.caption-photo-outside:hover::before {
+    opacity: 1;
+}
+
+.caption-photo-outside:hover .caption {
+    padding-bottom: clamp(0.45rem, 1vw, 0.85rem);
+    transform: translateY(-2px);
+}
+
+.caption-photo-outside:hover img {
+    transform: translateX(-50%) scale(1.04);
+    filter: brightness(0.92);
+}
+
+.arrow {
+    background: rgba(0, 0, 0, 0.35);
+    border: 1px solid var(--glass-border);
+    border-radius: 50%;
+    padding: clamp(0.35rem, 0.8vw, 0.55rem);
+    cursor: pointer;
+    z-index: 2;
+    position: absolute;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    top: 42%;
+    transform: translateY(-50%);
+    backdrop-filter: blur(8px);
+    transition: transform var(--transition-fast), background-color var(--transition-fast), border-color var(--transition-fast);
+}
+
+.arrow:hover {
+    transform: translateY(-50%) scale(1.08);
+    background: rgba(248, 250, 255, 0.12);
+    border-color: rgba(248, 250, 255, 0.28);
+}
+
+.arrow:active {
+    transform: translateY(-50%) scale(0.96);
+}
+
 .arrow img {
-    width: 5vw; /* lub inna odpowiednia wielkość */
+    width: clamp(22px, 3.2vw, 42px);
     height: auto;
 }
 
 .arrow.left {
-    left: -7vw;
+    left: 0;
 }
 
 .arrow.right {
-    right: -7vw;
-}
-@media (max-width: 1500px) {
-    .caption {
-        font-size: 24px;
-    }
+    right: 0;
 }
 
-@media (max-width: 1200px) {
-    .caption {
-        font-size: 20px;
-    }
+.carousel-dots {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: clamp(0.35rem, 1vw, 0.55rem);
+    margin-top: clamp(0.75rem, 2vh, 1.25rem);
+    position: absolute;
+    bottom: clamp(-1.5rem, -3vh, -1rem);
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+.carousel-dot {
+    width: clamp(7px, 1.2vw, 9px);
+    height: clamp(7px, 1.2vw, 9px);
+    border-radius: 999px;
+    border: none;
+    padding: 0;
+    cursor: pointer;
+    background-color: rgba(248, 250, 255, 0.28);
+    transition: width var(--transition-fast), background-color var(--transition-fast), transform var(--transition-fast);
+}
+
+.carousel-dot.is-active {
+    width: clamp(22px, 4vw, 28px);
+    background-color: var(--color-text-light);
+}
+
+.carousel-dot:hover {
+    transform: scale(1.15);
+    background-color: rgba(248, 250, 255, 0.55);
+}
+
+.main-section-3 .carousel-dot {
+    background-color: rgba(0, 0, 0, 0.22);
+}
+
+.main-section-3 .carousel-dot.is-active {
+    background-color: var(--color-bg);
+}
+
+.main-section-3 .carousel-dot:hover {
+    background-color: rgba(0, 0, 0, 0.4);
 }
 
 @media (max-width: 900px) {
-    .carousel-item {
-        min-width: 100%;
-    }
-    .carousel-item img {
-        width: 70vw;
-    }
     .carousel-container {
-        height: 70vw;
+        width: 100%;
+        max-width: none;
+        padding: 0;
+        padding-bottom: clamp(1.75rem, 4vh, 2.25rem);
+        height: auto;
     }
-    .arrow img {
-        width: 10vw; /* Większe strzałki na małych ekranach */
+
+    .carousel-container--graphics {
+        height: auto;
     }
+
+    .carousel--mobile {
+        overflow-x: auto;
+        overflow-y: hidden;
+        scroll-snap-type: x mandatory;
+        -webkit-overflow-scrolling: touch;
+        scrollbar-width: none;
+        gap: clamp(0.75rem, 3vw, 1rem);
+        padding: 0 clamp(7vw, 8vw, 10vw);
+        justify-content: flex-start;
+        height: auto;
+    }
+
+    .carousel--mobile::-webkit-scrollbar {
+        display: none;
+    }
+
+    .carousel--mobile .carousel-item {
+        min-width: min(82vw, 420px);
+        max-width: min(82vw, 420px);
+        scroll-snap-align: center;
+        flex-shrink: 0;
+        height: auto;
+        padding: 0;
+    }
+
+    .carousel--mobile .caption-photo-outside {
+        width: 100%;
+        max-height: none;
+        aspect-ratio: 4 / 3;
+        align-items: flex-end;
+        justify-content: center;
+    }
+
+    .carousel--mobile:not(.carousel--graphics) .caption-photo-outside {
+        background-color: rgba(0, 0, 0, 0.18);
+    }
+
+    .carousel--mobile:not(.carousel--graphics) .caption {
+        width: 100%;
+        justify-content: center;
+        padding-bottom: clamp(0.55rem, 2vw, 0.85rem);
+    }
+
+    .carousel--mobile.carousel--graphics .carousel-item {
+        min-width: min(76vw, 360px);
+        max-width: min(76vw, 360px);
+    }
+
+    .carousel--mobile.carousel--graphics .caption-photo-outside {
+        aspect-ratio: 1;
+        background-color: #ffffff;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .carousel--mobile.carousel--graphics .carousel-item img {
+        object-fit: contain;
+        transform: none;
+    }
+
+    .carousel--mobile .carousel-item img {
+        position: absolute;
+        inset: 0;
+        left: 0;
+        right: 0;
+        top: 0;
+        bottom: 0;
+        width: 100%;
+        height: 100%;
+        max-width: none;
+        max-height: none;
+        object-fit: cover;
+        object-position: center;
+        transform: none;
+    }
+
+    .carousel--mobile:not(.carousel--graphics) .carousel-item img {
+        object-fit: contain;
+        object-position: center bottom;
+    }
+
+    .carousel--mobile .caption-photo-outside:hover {
+        transform: none;
+    }
+
+    .carousel--mobile.carousel--graphics .caption-photo-outside:hover {
+        transform: none;
+        box-shadow: var(--shadow-soft);
+    }
+
+    .carousel--mobile.carousel--graphics .caption-photo-outside:hover img {
+        transform: none;
+        filter: none;
+    }
+
+    .arrow {
+        display: none;
+    }
+
+    .carousel-dots {
+        position: static;
+        transform: none;
+        margin-top: clamp(0.85rem, 2.5vh, 1.15rem);
+    }
+}
+
+@media (max-width: 480px) {
+    .carousel--mobile {
+        padding: 0 clamp(8vw, 10vw, 12vw);
+    }
+
+    .carousel--mobile .carousel-item {
+        min-width: min(84vw, 360px);
+        max-width: min(84vw, 360px);
+    }
+
+    .carousel--mobile.carousel--graphics .carousel-item {
+        min-width: min(78vw, 320px);
+        max-width: min(78vw, 320px);
+    }
+
     .caption {
-        font-size: 32px;
+        font-size: clamp(0.75rem, 3.2vw, 0.9375rem);
     }
+}
+
+@media (max-height: 700px) and (min-width: 901px) {
+    .carousel-container {
+        height: clamp(130px, 18vw, 220px);
+    }
+
+    .carousel-container--graphics {
+        height: clamp(150px, 20vw, 260px);
+    }
+
     .caption-photo-outside {
-        height: 70vw;
+        max-height: clamp(130px, 18vw, 220px);
+    }
+
+    .carousel--graphics .caption-photo-outside {
+        max-height: none;
     }
 }
 
-@media (max-width: 600px) {
-    .caption {
-        font-size: 28px;
+@media (prefers-reduced-motion: reduce) {
+    .carousel-slide-next,
+    .carousel-slide-prev {
+        animation: none;
     }
-}
 
-@media (max-width: 500px) {
-    .caption {
-        font-size: 24px;
+    .caption-photo-outside:hover,
+    .carousel--graphics .caption-photo-outside:hover {
+        transform: none;
     }
-}
 
-@media (max-width: 500px) {
-    .caption {
-        font-size: 20px;
+    .caption-photo-outside:hover img,
+    .carousel--graphics .caption-photo-outside:hover img {
+        transform: none;
+        filter: none;
     }
 }

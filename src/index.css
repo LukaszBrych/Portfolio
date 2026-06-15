@@ -1,8 +1,139 @@
-/* index.css lub App.css */
 @import url('https://fonts.googleapis.com/css2?family=Kanit:wght@100;200;300;400;500;600;700;800;900&display=swap');
 
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+}
+
+html {
+    overflow-x: hidden;
+    scroll-behavior: smooth;
+}
+
+:root {
+    --color-text-light: #F8FAFF;
+    --color-accent: #AFB8A8;
+    --color-bg: #000000;
+
+    --font-size-body: clamp(0.8125rem, 0.75rem + 0.3vw, 1rem);
+    --font-size-caption: clamp(0.875rem, 0.8rem + 0.4vw, 1.125rem);
+    --font-size-heading: clamp(1.75rem, 1.1rem + 2.8vw, 3.5rem);
+    --font-size-subheading: clamp(1.25rem, 0.9rem + 1.8vw, 2.5rem);
+    --font-size-nav: clamp(0.875rem, 0.75rem + 0.45vw, 1.375rem);
+    --font-weight-body: 300;
+
+    --section-padding-x: clamp(1rem, 4vw, 3rem);
+    --section-padding-y: clamp(0.75rem, 2vh, 2rem);
+
+    --section-header-offset: 120px;
+    --viewport-height: 100vh;
+    --contact-green-extra: clamp(1.75rem, 5vh, 4rem);
+
+    --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
+    --ease-in-out: cubic-bezier(0.65, 0, 0.35, 1);
+    --transition-fast: 0.25s var(--ease-out);
+    --transition-medium: 0.45s var(--ease-out);
+    --transition-slow: 0.7s var(--ease-out);
+    --shadow-soft: 0 12px 32px rgba(0, 0, 0, 0.28);
+    --shadow-lift: 0 20px 48px rgba(0, 0, 0, 0.38);
+    --glass-border: rgba(248, 250, 255, 0.1);
+}
+
+@supports (height: 100dvh) {
+    :root {
+        --viewport-height: 100dvh;
+    }
+}
+
+@media (max-width: 1199px) {
+    :root {
+        --font-size-heading: clamp(1.5rem, 4.5vw, 2.25rem);
+        --font-size-subheading: clamp(1.125rem, 3.5vw, 1.75rem);
+        --font-size-nav: clamp(0.8125rem, 2.5vw, 1.0625rem);
+    }
+}
+
+@media (max-width: 600px) {
+    :root {
+        --font-size-heading: clamp(1.375rem, 6vw, 1.875rem);
+        --font-size-body: clamp(0.8125rem, 3.2vw, 0.9375rem);
+        --section-padding-x: clamp(0.875rem, 4vw, 1.25rem);
+        --contact-green-extra: clamp(1.25rem, 4vh, 2.5rem);
+    }
+}
+
+@media (max-width: 380px) {
+    :root {
+        --font-size-heading: clamp(1.25rem, 7vw, 1.5rem);
+        --font-size-nav: clamp(0.75rem, 3vw, 0.875rem);
+    }
+}
 
 body {
     font-family: 'Kanit', sans-serif;
-    background-color: #000000;
+    background-color: var(--color-bg);
+    overflow-x: hidden;
+    margin: 0;
+    line-height: 1.5;
+}
+
+h2 {
+    margin: 0;
+    line-height: 1.1;
+}
+
+p {
+    margin: 0;
+}
+
+img {
+    max-width: 100%;
+    height: auto;
+}
+
+.sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
+}
+
+@keyframes fadeUp {
+    from {
+        opacity: 0;
+        transform: translateY(22px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes softBounce {
+    0%, 100% {
+        transform: translateY(0);
+    }
+    50% {
+        transform: translateY(5px);
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    html {
+        scroll-behavior: auto;
+    }
+
+    *,
+    *::before,
+    *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+    }
 }

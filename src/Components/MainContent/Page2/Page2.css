@@ -1,47 +1,102 @@
 .main-section-2 .top-panel {
-    height: 18vh;
+    height: var(--section-header-offset);
+    flex-shrink: 0;
 }
 
 .main-section-2 {
     display: flex;
     flex-direction: column;
-    height: 100vh;
+    min-height: var(--viewport-height);
+    height: var(--viewport-height);
+    overflow: hidden;
+    box-sizing: border-box;
+    background-color: var(--color-bg);
 }
 
 .main-section-2 h2 {
-    font-size: 64px;
+    font-size: var(--font-size-heading);
     font-weight: 900;
-    color: #AFB8A8;
-    padding-bottom: 2vh;
+    color: var(--color-accent);
+    padding-bottom: clamp(0.35rem, 1vh, 1rem);
+    text-align: center;
+    flex-shrink: 0;
+    letter-spacing: 0.04em;
 }
 
 .UI-designs-description {
-    font-weight: 400;
-    font-size: 16px;
-    color: #F8FAFF;
-    width: 80%;
-    padding-bottom: 10vh;
+    font-weight: var(--font-weight-body);
+    font-size: var(--font-size-body);
+    color: var(--color-text-light);
+    width: min(85%, 900px);
+    padding: clamp(0.25rem, 1vh, 0.75rem) var(--section-padding-x) clamp(0.75rem, 1.5vh, 1.5rem);
+    line-height: 1.6;
+    text-align: center;
+    flex-shrink: 1;
+    min-height: 0;
+    overflow-y: auto;
 }
 
 .UI-designs-description-outside {
     width: 100%;
     display: flex;
     flex-direction: column;
-    align-items: center
+    align-items: center;
+    flex-shrink: 1;
+    min-height: 0;
+    max-height: 38vh;
 }
 
 .design-slider-outside {
-    padding-bottom: 10vh;
+    flex: 1;
+    min-height: clamp(160px, 28vh, 340px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding-bottom: clamp(2rem, 4vh, 3rem);
+    width: 100%;
+    overflow: visible;
+    flex-shrink: 0;
 }
 
 @media (max-width: 900px) {
-    .main-section-2 h2 {
-        font-size: 48px;
+    .main-section-2 {
+        height: auto;
+        min-height: var(--viewport-height);
+        overflow: visible;
+    }
+
+    .UI-designs-description-outside {
+        max-height: none;
+        flex-shrink: 0;
+    }
+
+    .UI-designs-description {
+        width: min(92%, 900px);
+        overflow: visible;
+    }
+
+    .design-slider-outside {
+        min-height: clamp(200px, 50vw, 360px);
+        padding-bottom: clamp(1.5rem, 4vh, 2.5rem);
     }
 }
 
-@media (max-width: 600px) {
-    .UI-designs-description {
-        font-size: 14px;
+@media (max-width: 480px) {
+    .design-slider-outside {
+        min-height: clamp(180px, 58vw, 300px);
+    }
+}
+
+@media (max-height: 750px) and (min-width: 901px) {
+    .UI-designs-description-outside {
+        max-height: 32vh;
+    }
+
+    .main-section-2 h2 {
+        padding-bottom: clamp(0.25rem, 0.8vh, 0.5rem);
+    }
+
+    .design-slider-outside {
+        min-height: clamp(140px, 24vh, 260px);
     }
 }

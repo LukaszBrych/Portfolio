@@ -5,16 +5,20 @@ import Page2 from "./Page2/Page2.jsx";
 import {useRef} from "react";
 import Page3 from "./Page3/Page3.jsx";
 import Page4 from "./Page4/Page4.jsx";
+import useScrollReveal from "../../hooks/useScrollReveal.js";
+import StructuredData from "../Seo/StructuredData.jsx";
+import {SECTIONS} from "../../data/siteSeo.js";
+import {useLanguage} from "../../i18n/LanguageContext.jsx";
 
 const MainContent = () => {
+    useScrollReveal();
+    const {t} = useLanguage();
 
-    // Tworzenie referencji do komponentów
     const page1Ref = useRef(null);
     const page2Ref = useRef(null);
     const page3Ref = useRef(null);
     const page4Ref = useRef(null);
 
-    // Obiekt z referencjami przekazywany do NavBar
     const scrollRefs = {
         page1Ref,
         page2Ref,
@@ -23,24 +27,42 @@ const MainContent = () => {
     };
 
     return (
-        <div className="MainSite">
-            <NavBar scrollRefs={scrollRefs} />
+        <>
+            <StructuredData />
+            <main className="MainSite">
+                <h1 className="sr-only">{t.a11y.siteHeading}</h1>
+                <NavBar scrollRefs={scrollRefs} />
 
-
-            {/* Przypisanie referencji do komponentów */}
-            <section ref={page1Ref}>
-                <Page1 scrollRef={page2Ref}/>
-            </section>
-            <section ref={page2Ref}>
-                <Page2 />
-            </section>
-            <section ref={page3Ref}>
-                <Page3 />
-            </section>
-            <section ref={page4Ref}>
-                <Page4 />
-            </section>
-        </div>
+                <section
+                    id={SECTIONS.about.id}
+                    ref={page1Ref}
+                    aria-labelledby={SECTIONS.about.headingId}
+                >
+                    <Page1 scrollRef={page2Ref}/>
+                </section>
+                <section
+                    id={SECTIONS.uiProjects.id}
+                    ref={page2Ref}
+                    aria-labelledby={SECTIONS.uiProjects.headingId}
+                >
+                    <Page2 />
+                </section>
+                <section
+                    id={SECTIONS.graphics.id}
+                    ref={page3Ref}
+                    aria-labelledby={SECTIONS.graphics.headingId}
+                >
+                    <Page3 />
+                </section>
+                <section
+                    id={SECTIONS.contact.id}
+                    ref={page4Ref}
+                    aria-labelledby={SECTIONS.contact.headingId}
+                >
+                    <Page4 />
+                </section>
+            </main>
+        </>
     )
 }
 

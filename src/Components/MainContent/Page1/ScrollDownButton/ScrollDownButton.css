@@ -1,15 +1,54 @@
+.scroll-down-button {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
 .scroll-down-button button {
-    background-size: cover;
+    background-size: contain;
+    background-repeat: no-repeat;
     background-position: center;
     background-color: transparent;
     border: none;
     cursor: pointer;
-    width: 306px;
-    height: 76px;
+    width: min(280px, 80%);
+    height: auto;
+    line-height: 0;
+    display: block;
+    margin-inline: auto;
+    animation: softBounce 2.8s var(--ease-in-out) infinite;
+    transition: transform var(--transition-fast), opacity var(--transition-fast);
+}
+
+.scroll-down-button button:hover {
+    animation-play-state: paused;
+    transform: translateY(4px) scale(1.02);
+    opacity: 0.92;
+}
+
+.scroll-down-button button img {
+    display: block;
+    width: 100%;
+    height: auto;
+    margin: 0;
+    padding: 0;
 }
 
 @media (max-width: 900px) {
     .scroll-down-button button {
-        width: 100vw;
+        width: min(90%, 260px);
+    }
+}
+
+@media (max-width: 480px) {
+    .scroll-down-button button {
+        width: min(88%, 220px);
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .scroll-down-button button {
+        animation: none;
     }
 }

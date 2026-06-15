@@ -1,87 +1,105 @@
 import React, {useEffect, useState, useRef} from 'react';
+import {createPortal} from 'react-dom';
 import './ImagePopup.css';
 import BackArrow from '/src/assets/back-arrow.svg';
 import BackArrowHover from '/src/assets/back-arrow-hover.svg';
+import {useLanguage} from '../../../../../i18n/LanguageContext.jsx';
 
 const ImagePopup = ({isOpen, image, onClose, customStyles}) => {
+    const {t} = useLanguage();
     const [isTransitioning, setIsTransitioning] = useState(false);
     const [isClosing, setIsClosing] = useState(false);
     const [isHovered, setIsHovered] = useState(false);
 
     const popupRef = useRef(null);
-    const overlayRef = useRef(null);
+
+    const additionalImages = Array.isArray(image?.additionalImages) ? image.additionalImages : [];
+    const mainScreenSrc = image?.mainImage || image?.src;
+    const isAccentBg = customStyles?.backgroundColor === '#AFB8A8';
 
     useEffect(() => {
         if (isOpen) {
-            // Otwieranie popupu - uruchamiamy animację z lekkim opóźnieniem
             setIsClosing(false);
             setTimeout(() => {
                 setIsTransitioning(true);
                 document.body.style.overflow = 'hidden';
             }, 10);
         } else if (!isOpen && isTransitioning) {
-            // Zamykamy popup - uruchamiamy animację zwijania
             setIsClosing(true);
             setTimeout(() => {
                 setIsTransitioning(false);
                 setIsClosing(false);
                 document.body.style.overflow = '';
-            }, 500); // Czas, jaki trwa animacja (dopasowany do CSS `transition`)
+            }, 500);
         }
     }, [isOpen, isTransitioning]);
 
     useEffect(() => {
-        const handleClickOutside = (event) => {
-            if (overlayRef.current && !overlayRef.current.contains(event.target) &&
-                popupRef.current && !popupRef.current.contains(event.target)) {
+        const handleKeyDown = (event) => {
+            if (event.key === 'Escape' && isOpen) {
                 onClose();
             }
         };
 
-        if (isOpen) {
-            document.addEventListener('mousedown', handleClickOutside);
-        }
-
-        return () => {
-            document.removeEventListener('mousedown', handleClickOutside);
-        };
+        window.addEventListener('keydown', handleKeyDown);
+        return () => window.removeEventListener('keydown', handleKeyDown);
     }, [isOpen, onClose]);
 
     if (!isOpen && !isTransitioning) {
-        return null; // Całkowicie usuń popup po zakończeniu animacji zamykania
+        return null;
     }
 
-    return (
-        <div className="popup-overlay" onClick={onClose} ref={overlayRef}>
+    return createPortal(
+        <div className="popup-overlay" onClick={onClose}>
             <div
-                className={`popup-content ${isTransitioning ? 'open' : ''} ${isClosing ? 'closing' : ''}`}
+                className={`popup-content ${isTransitioning ? 'open' : ''} ${isClosing ? 'closing' : ''} ${isAccentBg ? 'popup-content--accent' : ''}`}
                 onClick={(e) => e.stopPropagation()}
                 ref={popupRef}
                 style={customStyles}
             >
-                <span className="popup-close" onClick={onClose} onMouseEnter={() => setIsHovered(true)}
-                      onMouseLeave={() => setIsHovered(false)}><img src={!isHovered ? BackArrow : BackArrowHover} alt="back"/></span>
-
-                {/* Tytuł */}
-                <h2>{image?.title}</h2>
-
-                {/* Główne zdjęcie */}
-                <img className="main-image-popup" src={image?.mainImage} alt={Image?.alt} style={{width: '100%'}}/>
-
-                {/* Opis */}
-                <p className="project-description">{image?.description}</p>
-
-                {/* Dodatkowe obrazy */}
-                <div className="additional-images">
-                    {image?.additionalImages && image.additionalImages.map((img, index) => (
-                        <img key={index} src={img.src} alt={img.alt} style={{width: '100px', margin: '10px'}}/>
-                    ))}
+                <div className="popup-toolbar">
+                    <button
+                        type="button"
+                        className="popup-exit"
+                        onClick={onClose}
+                        onMouseEnter={() => setIsHovered(true)}
+                        onMouseLeave={() => setIsHovered(false)}
+                        aria-label={t.a11y.close}
+                    >
+                        <img src={isHovered ? BackArrowHover : BackArrow} alt=""/>
+                        <span>{t.a11y.close}</span>
+                    </button>
                 </div>
 
-                {/* Podpis zdjęcia */}
-                <div className="popup-caption">{image?.caption}</div>
+                {(image?.title || image?.description) && (
+                    <header className="popup-header">
+                        {image?.title && <h2>{image.title}</h2>}
+                        {image?.description && (
+                            <p className="project-description">{image.description}</p>
+                        )}
+                    </header>
+                )}
+
+                <div className="popup-screens">
+                    {mainScreenSrc && (
+                        <img
+                            className="popup-screen"
+                            src={mainScreenSrc}
+                            alt={image?.alt || image?.title || ''}
+                        />
+                    )}
+                    {additionalImages.map((img, index) => (
+                        <img
+                            key={index}
+                            className="popup-screen"
+                            src={img.src}
+                            alt={img.alt || ''}
+                        />
+                    ))}
+                </div>
             </div>
-        </div>
+        </div>,
+        document.body
     );
 };
 
