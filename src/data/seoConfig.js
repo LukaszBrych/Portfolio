@@ -1,4 +1,4 @@
-import {PERSON, SITE_URL} from './siteSeo.js';
+import {PERSON, SITE_NAME, SITE_URL} from './siteSeo.js';
 
 export const OG_IMAGE = `${SITE_URL}logo-mark.svg`;
 export const OG_IMAGE_ALT = 'Logo portfolio Łukasz Brych – projektant UX/UI i front-end developer';
