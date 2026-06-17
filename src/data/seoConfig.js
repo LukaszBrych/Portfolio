@@ -138,6 +138,56 @@ export const SECTION_SEO_KEYS = {
     contact: 'contact',
 };
 
+export const PERSON_SCHEMA_ID = `${SITE_URL}#person`;
+export const PROFILE_PAGE_SCHEMA_ID = `${SITE_URL}#profile`;
+export const WEBSITE_SCHEMA_ID = `${SITE_URL}#website`;
+
+export const buildPersonSchema = (language, personDescription) => ({
+    '@type': 'Person',
+    '@id': PERSON_SCHEMA_ID,
+    name: PERSON.name,
+    givenName: 'Łukasz',
+    familyName: 'Brych',
+    alternateName: PERSON_ALTERNATE_NAMES,
+    url: SITE_URL,
+    image: OG_IMAGE,
+    jobTitle: language === 'pl'
+        ? 'Projektant UX/UI i Front-End Developer'
+        : 'UX/UI Designer and Front-End Developer',
+    description: personDescription,
+    email: `mailto:${PERSON.email}`,
+    sameAs: [PERSON.github, PERSON.instagram],
+    knowsAbout: PERSON_KNOWS_ABOUT[language],
+    mainEntityOfPage: {'@id': PROFILE_PAGE_SCHEMA_ID},
+    hasOccupation: {
+        '@type': 'Occupation',
+        name: language === 'pl' ? 'Projektant UX/UI' : 'UX/UI Designer',
+        occupationalCategory: language === 'pl'
+            ? 'Projektowanie interfejsów i front-end development'
+            : 'User interface design and front-end development',
+    },
+});
+
+export const buildProfilePageSchema = (language, meta, personDescription) => {
+    const person = buildPersonSchema(language, personDescription);
+
+    return {
+        '@type': 'ProfilePage',
+        '@id': PROFILE_PAGE_SCHEMA_ID,
+        url: SITE_URL,
+        name: SITE_NAME,
+        description: meta.description,
+        inLanguage: language === 'pl' ? 'pl-PL' : 'en-US',
+        isPartOf: {'@id': WEBSITE_SCHEMA_ID},
+        about: person,
+        mainEntity: person,
+        primaryImageOfPage: {
+            '@type': 'ImageObject',
+            url: OG_IMAGE,
+        },
+    };
+};
+
 export const STATIC_PERSON_SCHEMA = {
     '@context': 'https://schema.org',
     '@type': 'Person',

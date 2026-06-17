@@ -32,7 +32,7 @@ const MainContent = () => {
     return (
         <>
             <StructuredData />
-            <main className="MainSite" itemScope itemType="https://schema.org/ProfilePage">
+            <main className="MainSite">
                 <h1 className="sr-only">{t.a11y.siteHeading}</h1>
                 <NavBar scrollRefs={scrollRefs} />
 

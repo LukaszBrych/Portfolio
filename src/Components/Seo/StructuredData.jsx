@@ -1,9 +1,11 @@
 import {useLanguage} from '../../i18n/LanguageContext.jsx';
 import {
+    buildPersonSchema,
+    buildProfilePageSchema,
     OG_IMAGE,
-    PERSON_ALTERNATE_NAMES,
-    PERSON_KNOWS_ABOUT,
+    PERSON_SCHEMA_ID,
     PROFESSIONAL_SERVICES,
+    WEBSITE_SCHEMA_ID,
 } from '../../data/seoConfig.js';
 import {NAV_SECTION_KEYS, PERSON, SECTIONS, SITE_NAME, SITE_URL} from '../../data/siteSeo.js';
 
@@ -13,6 +15,8 @@ const StructuredData = () => {
     const uiProjects = Object.values(t.uiProjects.items);
     const applications = Object.values(t.applications.items);
     const graphicWorks = t.graphics.items;
+    const personSchema = buildPersonSchema(language, t.a11y.siteHeading);
+    const profilePageSchema = buildProfilePageSchema(language, t.meta, t.a11y.siteHeading);
 
     const navLabels = {
         about: t.nav.about,
@@ -52,8 +56,8 @@ const StructuredData = () => {
         name: sectionHeadings[section],
         description: sectionDescriptions[section],
         inLanguage,
-        isPartOf: {'@id': `${SITE_URL}#website`},
-        about: {'@id': `${SITE_URL}#person`},
+        isPartOf: {'@id': WEBSITE_SCHEMA_ID},
+        about: {'@id': PERSON_SCHEMA_ID},
         primaryImageOfPage: {
             '@type': 'ImageObject',
             url: OG_IMAGE,
@@ -66,8 +70,8 @@ const StructuredData = () => {
         name: project.title,
         description: project.description,
         inLanguage,
-        author: {'@id': `${SITE_URL}#person`},
-        creator: {'@id': `${SITE_URL}#person`},
+        author: {'@id': PERSON_SCHEMA_ID},
+        creator: {'@id': PERSON_SCHEMA_ID},
         url: `${SITE_URL}#${SECTIONS.uiProjects.id}`,
         genre: language === 'pl' ? 'Projekt UI' : 'UI design project',
     }));
@@ -80,8 +84,8 @@ const StructuredData = () => {
         applicationCategory: 'BusinessApplication',
         operatingSystem: 'Android',
         inLanguage,
-        author: {'@id': `${SITE_URL}#person`},
-        creator: {'@id': `${SITE_URL}#person`},
+        author: {'@id': PERSON_SCHEMA_ID},
+        creator: {'@id': PERSON_SCHEMA_ID},
         url: `${SITE_URL}#${SECTIONS.applications.id}`,
     }));
 
@@ -92,66 +96,24 @@ const StructuredData = () => {
         description: work.description,
         artform: language === 'pl' ? 'Grafika cyfrowa' : 'Digital artwork',
         inLanguage,
-        creator: {'@id': `${SITE_URL}#person`},
+        creator: {'@id': PERSON_SCHEMA_ID},
         url: `${SITE_URL}#${SECTIONS.graphics.id}`,
     }));
 
     const structuredData = {
         '@context': 'https://schema.org',
         '@graph': [
+            personSchema,
+            profilePageSchema,
             {
                 '@type': 'WebSite',
-                '@id': `${SITE_URL}#website`,
+                '@id': WEBSITE_SCHEMA_ID,
                 url: SITE_URL,
                 name: SITE_NAME,
-                alternateName: PERSON_ALTERNATE_NAMES,
                 description: t.meta.description,
                 inLanguage: ['pl-PL', 'en-US'],
-                publisher: {'@id': `${SITE_URL}#person`},
+                publisher: {'@id': PERSON_SCHEMA_ID},
                 image: OG_IMAGE,
-            },
-            {
-                '@type': 'ProfilePage',
-                '@id': `${SITE_URL}#profile`,
-                url: SITE_URL,
-                name: SITE_NAME,
-                description: t.meta.description,
-                inLanguage,
-                isPartOf: {'@id': `${SITE_URL}#website`},
-                about: {'@id': `${SITE_URL}#person`},
-                mainEntity: {'@id': `${SITE_URL}#person`},
-                primaryImageOfPage: {
-                    '@type': 'ImageObject',
-                    url: OG_IMAGE,
-                },
-            },
-            {
-                '@type': 'Person',
-                '@id': `${SITE_URL}#person`,
-                name: PERSON.name,
-                givenName: 'Łukasz',
-                familyName: 'Brych',
-                alternateName: PERSON_ALTERNATE_NAMES,
-                url: SITE_URL,
-                image: OG_IMAGE,
-                jobTitle: language === 'pl'
-                    ? 'Projektant UX/UI i Front-End Developer'
-                    : 'UX/UI Designer and Front-End Developer',
-                description: t.a11y.siteHeading,
-                email: `mailto:${PERSON.email}`,
-                sameAs: [PERSON.github, PERSON.instagram],
-                knowsAbout: PERSON_KNOWS_ABOUT[language],
-                hasOccupation: {
-                    '@type': 'Occupation',
-                    name: language === 'pl' ? 'Projektant UX/UI' : 'UX/UI Designer',
-                    occupationalCategory: language === 'pl'
-                        ? 'Projektowanie interfejsów i front-end development'
-                        : 'User interface design and front-end development',
-                },
-                worksFor: {
-                    '@type': 'Organization',
-                    name: language === 'pl' ? 'Freelance / SaaS' : 'Freelance / SaaS',
-                },
             },
             {
                 '@type': 'ProfessionalService',
@@ -167,7 +129,7 @@ const StructuredData = () => {
                     name: language === 'pl' ? 'Polska' : 'Poland',
                 },
                 availableLanguage: ['pl-PL', 'en-US'],
-                provider: {'@id': `${SITE_URL}#person`},
+                provider: {'@id': PERSON_SCHEMA_ID},
                 serviceType: PROFESSIONAL_SERVICES[language],
             },
             {

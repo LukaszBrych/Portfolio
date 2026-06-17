@@ -46,14 +46,6 @@
             "@context": "https://schema.org",
             "@graph": [
                 {
-                    "@type": "WebSite",
-                    "@id": "https://lukaszbrych.github.io/Portfolio/#website",
-                    "url": "https://lukaszbrych.github.io/Portfolio/",
-                    "name": "Portfolio Łukasz Brych",
-                    "inLanguage": ["pl-PL", "en-US"],
-                    "publisher": {"@id": "https://lukaszbrych.github.io/Portfolio/#person"}
-                },
-                {
                     "@type": "Person",
                     "@id": "https://lukaszbrych.github.io/Portfolio/#person",
                     "name": "Łukasz Brych",
@@ -74,7 +66,45 @@
                         "React",
                         "Grafika komputerowa",
                         "MobilControl MC 6600"
-                    ]
+                    ],
+                    "mainEntityOfPage": {
+                        "@id": "https://lukaszbrych.github.io/Portfolio/#profile"
+                    }
+                },
+                {
+                    "@type": "ProfilePage",
+                    "@id": "https://lukaszbrych.github.io/Portfolio/#profile",
+                    "url": "https://lukaszbrych.github.io/Portfolio/",
+                    "name": "Portfolio Łukasz Brych",
+                    "description": "Portfolio Łukasz Brych – projektant UX/UI, front-end developer i grafik. Projekty interfejsów aplikacji webowych, SaaS, e-commerce oraz rysunki graficzne.",
+                    "inLanguage": "pl-PL",
+                    "isPartOf": {
+                        "@id": "https://lukaszbrych.github.io/Portfolio/#website"
+                    },
+                    "mainEntity": {
+                        "@type": "Person",
+                        "@id": "https://lukaszbrych.github.io/Portfolio/#person",
+                        "name": "Łukasz Brych",
+                        "givenName": "Łukasz",
+                        "familyName": "Brych",
+                        "url": "https://lukaszbrych.github.io/Portfolio/",
+                        "email": "mailto:brychlukasz123@gmail.com",
+                        "sameAs": [
+                            "https://github.com/LukaszBrych",
+                            "https://www.instagram.com/lukasheq_"
+                        ],
+                        "jobTitle": "Projektant UX/UI i Front-End Developer"
+                    }
+                },
+                {
+                    "@type": "WebSite",
+                    "@id": "https://lukaszbrych.github.io/Portfolio/#website",
+                    "url": "https://lukaszbrych.github.io/Portfolio/",
+                    "name": "Portfolio Łukasz Brych",
+                    "inLanguage": ["pl-PL", "en-US"],
+                    "publisher": {
+                        "@id": "https://lukaszbrych.github.io/Portfolio/#person"
+                    }
                 }
             ]
         }
