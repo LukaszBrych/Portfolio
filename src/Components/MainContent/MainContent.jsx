@@ -3,6 +3,7 @@ import NavBar from "./NavBar/NavBar.jsx";
 import Page1 from "./Page1/Page1.jsx";
 import Page2 from "./Page2/Page2.jsx";
 import {useRef} from "react";
+import PageApplications from "./PageApplications/PageApplications.jsx";
 import Page3 from "./Page3/Page3.jsx";
 import Page4 from "./Page4/Page4.jsx";
 import useScrollReveal from "../../hooks/useScrollReveal.js";
@@ -18,12 +19,14 @@ const MainContent = () => {
     const page2Ref = useRef(null);
     const page3Ref = useRef(null);
     const page4Ref = useRef(null);
+    const page5Ref = useRef(null);
 
     const scrollRefs = {
         page1Ref,
         page2Ref,
         page3Ref,
         page4Ref,
+        page5Ref,
     };
 
     return (
@@ -48,15 +51,22 @@ const MainContent = () => {
                     <Page2 />
                 </section>
                 <section
-                    id={SECTIONS.graphics.id}
+                    id={SECTIONS.applications.id}
                     ref={page3Ref}
+                    aria-labelledby={SECTIONS.applications.headingId}
+                >
+                    <PageApplications />
+                </section>
+                <section
+                    id={SECTIONS.graphics.id}
+                    ref={page4Ref}
                     aria-labelledby={SECTIONS.graphics.headingId}
                 >
                     <Page3 />
                 </section>
                 <section
                     id={SECTIONS.contact.id}
-                    ref={page4Ref}
+                    ref={page5Ref}
                     aria-labelledby={SECTIONS.contact.headingId}
                 >
                     <Page4 />

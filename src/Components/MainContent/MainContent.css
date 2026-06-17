@@ -19,11 +19,18 @@
     animation: fadeUp 0.8s var(--ease-out) both;
 }
 
+.MainSite > section.is-visible .applications-intro,
+.MainSite > section.is-visible .applications-showcase,
 .MainSite > section.is-visible .UI-designs-description,
+.MainSite > section.is-visible .applications-description,
 .MainSite > section.is-visible .graphic-designs-description,
 .MainSite > section.is-visible #my-description,
 .MainSite > section.is-visible .down-panel,
 .MainSite > section.is-visible .design-slider-outside {
+    animation: fadeUp 0.85s var(--ease-out) 0.12s both;
+}
+
+.MainSite > section.is-visible .applications-empty {
     animation: fadeUp 0.85s var(--ease-out) 0.12s both;
 }
 
@@ -41,11 +48,18 @@
     }
 
     .MainSite > section.is-visible h2,
+    .MainSite > section.is-visible .applications-intro,
+    .MainSite > section.is-visible .applications-showcase,
     .MainSite > section.is-visible .UI-designs-description,
+    .MainSite > section.is-visible .applications-description,
     .MainSite > section.is-visible .graphic-designs-description,
     .MainSite > section.is-visible #my-description,
     .MainSite > section.is-visible .down-panel,
     .MainSite > section.is-visible .design-slider-outside {
+        animation: none;
+    }
+
+    .MainSite > section.is-visible .applications-empty {
         animation: none;
     }
 }

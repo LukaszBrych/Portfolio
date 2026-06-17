@@ -19,6 +19,7 @@
     overflow-x: hidden;
     overflow-y: auto;
     -webkit-overflow-scrolling: touch;
+    overscroll-behavior: contain;
     background-color: var(--color-bg);
     transform: translateY(calc(100vh - var(--section-header-offset)));
     transition: transform 0.55s var(--ease-out);

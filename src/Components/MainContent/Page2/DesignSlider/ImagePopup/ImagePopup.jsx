@@ -4,6 +4,7 @@ import './ImagePopup.css';
 import BackArrow from '/src/assets/back-arrow.svg';
 import BackArrowHover from '/src/assets/back-arrow-hover.svg';
 import {useLanguage} from '../../../../../i18n/LanguageContext.jsx';
+import useScrollLock from '../../../../../hooks/useScrollLock.js';
 
 const ImagePopup = ({isOpen, image, onClose, customStyles}) => {
     const {t} = useLanguage();
@@ -16,22 +17,31 @@ const ImagePopup = ({isOpen, image, onClose, customStyles}) => {
     const additionalImages = Array.isArray(image?.additionalImages) ? image.additionalImages : [];
     const mainScreenSrc = image?.mainImage || image?.src;
     const isAccentBg = customStyles?.backgroundColor === '#AFB8A8';
+    const isScrollLocked = isOpen || isTransitioning;
+
+    useScrollLock(isScrollLocked);
 
     useEffect(() => {
         if (isOpen) {
             setIsClosing(false);
-            setTimeout(() => {
+            const openTimer = window.setTimeout(() => {
                 setIsTransitioning(true);
-                document.body.style.overflow = 'hidden';
             }, 10);
-        } else if (!isOpen && isTransitioning) {
+
+            return () => window.clearTimeout(openTimer);
+        }
+
+        if (!isOpen && isTransitioning) {
             setIsClosing(true);
-            setTimeout(() => {
+            const closeTimer = window.setTimeout(() => {
                 setIsTransitioning(false);
                 setIsClosing(false);
-                document.body.style.overflow = '';
             }, 500);
+
+            return () => window.clearTimeout(closeTimer);
         }
+
+        return undefined;
     }, [isOpen, isTransitioning]);
 
     useEffect(() => {

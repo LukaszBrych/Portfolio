@@ -4,6 +4,23 @@ import LeftArrow from '/src/assets/left-slide-button-ui-designs.svg';
 import LeftArrowHover from '/src/assets/left-slide-button-ui-designs-hover.svg';
 import RightArrow from '/src/assets/right-slide-button-ui-designs.svg';
 import RightArrowHover from '/src/assets/right-slide-button-ui-designs-hover.svg';
+import ToolsRentDesignThumbnail from '/src/assets/ToolsRent-design-thumbnail.png';
+import ToolsRentFirstPhoto from '/src/assets/ToolsRent-first-photo.png';
+import ToolsRentSecondPhoto from '/src/assets/ToolsRent-second-photo.png';
+import ToolsRentThirdPhoto from '/src/assets/ToolsRent-third-photo.png';
+import ToolsRentFourthPhoto from '/src/assets/ToolsRent-fourth-photo.png';
+import ToolsRentFifthPhoto from '/src/assets/ToolsRent-fifth-photo.png';
+import ToolsRentSixthPhoto from '/src/assets/ToolsRent-sixth-photo.png';
+import ToolsRentSeventhPhoto from '/src/assets/ToolsRent-seventh-photo.png';
+import ToolsRentEighthPhoto from '/src/assets/ToolsRent-eighth-photo.png';
+import ToolsRentNinthPhoto from '/src/assets/ToolsRent-nineth-photo.png';
+import ToolsRentEleventhPhoto from '/src/assets/RentTools-eleventh-photo.png';
+import ToolsRentTwelfthPhoto from '/src/assets/ToolsRent-twelveth-photo.png';
+import ToolsRentThirteenthPhoto from '/src/assets/ToolsRent-thirteenth-photo.png';
+import ToolsRentFourteenthPhoto from '/src/assets/ToolsRent-fourteenth-photo.png';
+import ToolsRentFifteenthPhoto from '/src/assets/ToolsRent-fifteenth-photo.png';
+import ToolsRentSixteenthPhoto from '/src/assets/ToolsRent-sixteenth-photo.png';
+import ToolsRentSeventeenthPhoto from '/src/assets/ToolsRent-seventeenth-photo.png';
 import GymDesignThumbnail from '/src/assets/gym-design-thumbnail.png';
 import ShopDesignThumbnail from '/src/assets/shop-design-thumbnail.png';
 import HotelDesignThumbnail from '/src/assets/hotel-design-thumbnail.png';
@@ -26,11 +43,37 @@ import {useMemo} from 'react';
 
 const Page2 = () => {
     const {t} = useLanguage();
-    const {gym, shop, hotel, music} = t.uiProjects.items;
+    const {toolsRent, gym, shop, hotel, music} = t.uiProjects.items;
 
     const images = useMemo(() => [
         {
             id: 1,
+            src: ToolsRentDesignThumbnail,
+            alt: `${t.a11y.uiThumbAlt}: ${toolsRent.title}`,
+            caption: toolsRent.caption,
+            description: toolsRent.description,
+            mainImage: ToolsRentFirstPhoto,
+            additionalImages: [
+                {src: ToolsRentSecondPhoto, alt: `${toolsRent.title} – ${t.a11y.screen} 2`},
+                {src: ToolsRentThirdPhoto, alt: `${toolsRent.title} – ${t.a11y.screen} 3`},
+                {src: ToolsRentFourthPhoto, alt: `${toolsRent.title} – ${t.a11y.screen} 4`},
+                {src: ToolsRentFifthPhoto, alt: `${toolsRent.title} – ${t.a11y.screen} 5`},
+                {src: ToolsRentSixthPhoto, alt: `${toolsRent.title} – ${t.a11y.screen} 6`},
+                {src: ToolsRentSeventhPhoto, alt: `${toolsRent.title} – ${t.a11y.screen} 7`},
+                {src: ToolsRentEighthPhoto, alt: `${toolsRent.title} – ${t.a11y.screen} 8`},
+                {src: ToolsRentNinthPhoto, alt: `${toolsRent.title} – ${t.a11y.screen} 9`},
+                {src: ToolsRentEleventhPhoto, alt: `${toolsRent.title} – ${t.a11y.screen} 10`},
+                {src: ToolsRentTwelfthPhoto, alt: `${toolsRent.title} – ${t.a11y.screen} 11`},
+                {src: ToolsRentThirteenthPhoto, alt: `${toolsRent.title} – ${t.a11y.screen} 12`},
+                {src: ToolsRentFourteenthPhoto, alt: `${toolsRent.title} – ${t.a11y.screen} 13`},
+                {src: ToolsRentFifteenthPhoto, alt: `${toolsRent.title} – ${t.a11y.screen} 14`},
+                {src: ToolsRentSixteenthPhoto, alt: `${toolsRent.title} – ${t.a11y.screen} 15`},
+                {src: ToolsRentSeventeenthPhoto, alt: `${toolsRent.title} – ${t.a11y.screen} 16`},
+            ],
+            title: toolsRent.title,
+        },
+        {
+            id: 2,
             src: GymDesignThumbnail,
             alt: `${t.a11y.uiThumbAlt}: ${gym.title}`,
             caption: gym.caption,
@@ -47,7 +90,7 @@ const Page2 = () => {
             title: gym.title,
         },
         {
-            id: 2,
+            id: 3,
             src: ShopDesignThumbnail,
             alt: `${t.a11y.uiThumbAlt}: ${shop.title}`,
             caption: shop.caption,
@@ -59,7 +102,7 @@ const Page2 = () => {
             ],
         },
         {
-            id: 3,
+            id: 4,
             src: HotelDesignThumbnail,
             alt: `${t.a11y.uiThumbAlt}: ${hotel.title}`,
             caption: hotel.caption,
@@ -71,7 +114,7 @@ const Page2 = () => {
             ],
         },
         {
-            id: 4,
+            id: 5,
             src: MusicDesignThumbnail,
             alt: `${t.a11y.uiThumbAlt}: ${music.title}`,
             caption: music.caption,
@@ -79,7 +122,7 @@ const Page2 = () => {
             description: music.description,
             mainImage: MusicFirstPhoto,
         },
-    ], [t, gym, shop, hotel, music]);
+    ], [t, toolsRent, gym, shop, hotel, music]);
 
     return (
         <div className="main-section-2">

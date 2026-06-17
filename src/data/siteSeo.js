@@ -17,6 +17,10 @@ export const SECTIONS = {
         id: 'projekty-ui',
         headingId: 'ui-projects-heading',
     },
+    applications: {
+        id: 'aplikacje',
+        headingId: 'applications-heading',
+    },
     graphics: {
         id: 'rysunki-graficzne',
         headingId: 'graphics-heading',
@@ -30,6 +34,7 @@ export const SECTIONS = {
 export const NAV_SECTION_KEYS = [
     {key: 'page1Ref', section: 'about'},
     {key: 'page2Ref', section: 'uiProjects'},
-    {key: 'page3Ref', section: 'graphics'},
-    {key: 'page4Ref', section: 'contact'},
+    {key: 'page3Ref', section: 'applications'},
+    {key: 'page4Ref', section: 'graphics'},
+    {key: 'page5Ref', section: 'contact'},
 ];

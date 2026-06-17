@@ -134,6 +134,7 @@ const NavBar = ({scrollRefs}) => {
     const navLabels = {
         about: t.nav.about,
         uiProjects: t.nav.uiProjects,
+        applications: t.nav.applications,
         graphics: t.nav.graphics,
         contact: t.nav.contact,
     };

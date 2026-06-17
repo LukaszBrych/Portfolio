@@ -18,6 +18,7 @@ export const translations = {
             slideNav: 'Nawigacja slajdów',
             slide: 'Slajd',
             uiThumbAlt: 'Miniatura projektu UI',
+            appsThumbAlt: 'Miniatura aplikacji',
             screen: 'ekran',
             switchToPl: 'Przełącz język na polski',
             switchToEn: 'Przełącz język na angielski',
@@ -25,6 +26,7 @@ export const translations = {
         nav: {
             about: 'O mnie',
             uiProjects: 'Projekty UI',
+            applications: 'Aplikacje',
             graphics: 'Rysunki graficzne',
             contact: 'Kontakt',
         },
@@ -45,8 +47,14 @@ export const translations = {
         uiProjects: {
             heading: 'PROJEKTY UI',
             description:
-                'Wybrane projekty UI obejmują aplikacje webowe, produkty SaaS, e-commerce, strony hotelowe oraz interfejsy z branży fitness i muzyki. Prezentuję pełny proces projektowy — od zdefiniowania problemu i architektury informacji, przez projektowanie UX/UI, aż po dopracowane ekrany gotowe do wdrożenia we współpracy z zespołem developerskim.',
+                'Wybrane projekty UI obejmują aplikacje webowe, produkty SaaS, e-commerce, wypożyczalnie narzędzi, strony hotelowe oraz interfejsy z branży fitness i muzyki. Prezentuję pełny proces projektowy — od zdefiniowania problemu i architektury informacji, przez projektowanie UX/UI, aż po dopracowane ekrany gotowe do wdrożenia we współpracy z zespołem developerskim.',
             items: {
+                toolsRent: {
+                    title: 'Wypożyczalnia narzędzi',
+                    caption: 'Wypożyczalnia narzędzi',
+                    description:
+                        'Projekt aplikacji webowej do wypożyczania narzędzi i sprzętu budowlanego. Interfejs prowadzi użytkownika od przeglądania katalogu i filtrowania oferty, przez szczegóły produktu i koszyk, aż po rezerwację terminu i panel klienta. Czytelna typografia, spójna kolorystyka i logiczna nawigacja ułatwiają szybkie znalezienie sprzętu i dokończenie wypożyczenia.',
+                },
                 gym: {
                     title: 'System obsługi siłowni',
                     caption: 'System obsługi siłowni',
@@ -70,6 +78,22 @@ export const translations = {
                     caption: 'Aplikacja muzyczna',
                     description:
                         'Projekt aplikacji muzycznej z ciemnym, nowoczesnym interfejsem i naciskiem na odkrywanie utworów. Układ ekranów wspiera szybki dostęp do playlist, wyszukiwania i odtwarzania. Typografia i kompozycja ekranów budują spójny klimat produktu audio, zachowując prostą nawigację mimo rozbudowanej funkcjonalności.',
+                },
+            },
+        },
+        applications: {
+            heading: 'APLIKACJE',
+            headingBefore: 'APLI',
+            headingAccent: 'KACJE',
+            description:
+                'Działające aplikacje webowe i mobilne — od koncepcji UX/UI po wdrożenie. Prezentuję produkty, które zaprojektowałem i zbudowałem: kluczowe ekrany, przepływy użytkownika oraz opis funkcji i technologii. Sekcja pokazuje realne rozwiązania gotowe do użycia, a nie tylko makiety.',
+            emptyMessage: 'Projekty aplikacji pojawią się wkrótce — karuzela i podgląd ekranów są już gotowe.',
+            items: {
+                sensorbox: {
+                    title: 'MobilControl MC 6600',
+                    caption: 'MC 6600',
+                    description:
+                        'Aplikacja mobilna do pracy z urządzeniem pomiarowym MobilControl MC 6600. Umożliwia połączenie przez Bluetooth, podgląd pomiarów na konfigurowalnych układach ekranów czujników (P1–P6) oraz ustawianie zakresów, przepływu i kalibracji turbin. Obsługuje standardowe pomiary z plikami live, wykresami, raportami PDF i eksportem CSV, rejestrację pików milisekundowych oraz pobieranie wyników z SensorBox. Metadane zlecenia i menu boczne ułatwiają codzienną pracę serwisową w terenie.',
                 },
             },
         },
@@ -133,6 +157,7 @@ export const translations = {
             slideNav: 'Slide navigation',
             slide: 'Slide',
             uiThumbAlt: 'UI project thumbnail',
+            appsThumbAlt: 'Application thumbnail',
             screen: 'screen',
             switchToPl: 'Switch language to Polish',
             switchToEn: 'Switch language to English',
@@ -140,6 +165,7 @@ export const translations = {
         nav: {
             about: 'About me',
             uiProjects: 'UI Projects',
+            applications: 'Applications',
             graphics: 'Graphic Art',
             contact: 'Contact',
         },
@@ -160,8 +186,14 @@ export const translations = {
         uiProjects: {
             heading: 'UI PROJECTS',
             description:
-                'Selected UI projects include web applications, SaaS products, e-commerce, hotel websites and interfaces for fitness and music. I present the full design process — from problem definition and information architecture to polished screens ready for development.',
+                'Selected UI projects include web applications, SaaS products, e-commerce, tool rental platforms, hotel websites and interfaces for fitness and music. I present the full design process — from problem definition and information architecture to polished screens ready for development.',
             items: {
+                toolsRent: {
+                    title: 'Tool rental platform',
+                    caption: 'Tool rental platform',
+                    description:
+                        'A web application concept for renting tools and construction equipment. The interface guides users from browsing and filtering the catalog, through product details and cart, to booking dates and a customer dashboard. Clear typography, consistent colors and logical navigation make it easy to find equipment and complete a rental.',
+                },
                 gym: {
                     title: 'Gym management system',
                     caption: 'Gym management system',
@@ -185,6 +217,22 @@ export const translations = {
                     caption: 'Music application',
                     description:
                         'A music app concept with a dark, modern interface focused on discovering tracks. Screen layouts support quick access to playlists, search and playback. Typography and composition create a consistent audio product feel while keeping navigation simple.',
+                },
+            },
+        },
+        applications: {
+            heading: 'APPLICATIONS',
+            headingBefore: 'APPLI',
+            headingAccent: 'CATIONS',
+            description:
+                'Live web and mobile applications — from UX/UI concept to implementation. I showcase products I designed and built: key screens, user flows and descriptions of features and technology. This section highlights real, usable solutions — not just mockups.',
+            emptyMessage: 'Application projects coming soon — the carousel and screen preview are ready.',
+            items: {
+                sensorbox: {
+                    title: 'MobilControl MC 6600',
+                    caption: 'MC 6600',
+                    description:
+                        'A mobile application for working with the MobilControl MC 6600 measurement device. It connects via Bluetooth, shows readings on configurable sensor screen layouts (P1–P6) and supports range settings, flow configuration and turbine calibration. The app covers standard measurements with live files, charts, PDF reports and CSV export, millisecond peak recording and downloading results from the SensorBox hardware. Order metadata and a side menu support everyday field service work.',
                 },
             },
         },

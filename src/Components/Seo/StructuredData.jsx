@@ -5,6 +5,7 @@ const StructuredData = () => {
     const {language, t} = useLanguage();
 
     const uiProjects = Object.values(t.uiProjects.items);
+    const applications = Object.values(t.applications.items);
     const graphicWorks = t.graphics.items;
 
     const structuredData = {
@@ -46,6 +47,17 @@ const StructuredData = () => {
                 '@id': `${SITE_URL}#ui-projects`,
                 name: language === 'pl' ? 'Projekty UI – portfolio Łukasz Brych' : 'UI Projects – Łukasz Brych portfolio',
                 itemListElement: uiProjects.map((project, index) => ({
+                    '@type': 'ListItem',
+                    position: index + 1,
+                    name: project.title,
+                    description: project.description,
+                })),
+            },
+            {
+                '@type': 'ItemList',
+                '@id': `${SITE_URL}#applications`,
+                name: language === 'pl' ? 'Aplikacje – portfolio Łukasz Brych' : 'Applications – Łukasz Brych portfolio',
+                itemListElement: applications.map((project, index) => ({
                     '@type': 'ListItem',
                     position: index + 1,
                     name: project.title,
