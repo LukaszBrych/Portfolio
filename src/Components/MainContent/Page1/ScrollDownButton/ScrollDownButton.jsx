@@ -1,6 +1,7 @@
 import './ScrollDownButton.css';
 import React from 'react';
 import {useState} from 'react';
+import {scrollToSectionRef} from '../../../../utils/scrollToSection.js';
 import {useLanguage} from '../../../../i18n/LanguageContext.jsx';
 
 const ScrollDownButton = ({
@@ -16,12 +17,7 @@ const ScrollDownButton = ({
     const handleMouseLeave = () => setIsHovered(false);
 
     const scrollToSection = () => {
-        if (scrollRef.current) {
-            window.scrollTo({
-                top: scrollRef.current.offsetTop,
-                behavior: 'smooth',
-            });
-        }
+        scrollToSectionRef(scrollRef);
     };
 
     return (

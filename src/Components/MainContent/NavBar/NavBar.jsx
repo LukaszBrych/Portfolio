@@ -5,51 +5,31 @@ import React, {useState, useEffect, useCallback, useRef} from 'react';
 import Logo from '/src/assets/LOGO.svg';
 import {NAV_SECTION_KEYS, SECTIONS} from '../../../data/siteSeo.js';
 import {useLanguage} from '../../../i18n/LanguageContext.jsx';
+import {
+    scrollToSectionElement,
+    updateSectionHeaderOffset,
+} from '../../../utils/scrollToSection.js';
 
 const NavBar = ({scrollRefs}) => {
     const [activeSection, setActiveSection] = useState('');
+    const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
     const isNavbarAnimatingRef = useRef(false);
     const {language, setLanguage, t} = useLanguage();
 
-    const closeMobileMenu = () => {
-        const collapse = document.getElementById('navbarNav');
-        if (!collapse?.classList.contains('show')) return;
-
-        const collapseInstance = window.bootstrap?.Collapse?.getInstance(collapse);
-        if (collapseInstance) {
-            collapseInstance.hide();
-            return;
-        }
-
-        collapse.classList.remove('show');
-    };
-
-    const getSectionScrollTop = (element) => (
-        element.getBoundingClientRect().top + window.pageYOffset
-    );
+    const closeMobileMenu = useCallback(() => {
+        setIsMobileMenuOpen(false);
+    }, []);
 
     const scrollToSection = (ref) => {
-        const collapse = document.getElementById('navbarNav');
-        const mobileMenuWasOpen = collapse?.classList.contains('show');
+        const wasOpen = isMobileMenuOpen;
 
-        closeMobileMenu();
-
-        const performScroll = () => {
-            if (!ref.current) return;
-            window.scrollTo({
-                top: getSectionScrollTop(ref.current),
-                behavior: 'smooth',
-            });
-        };
-
-        if (mobileMenuWasOpen) {
-            window.setTimeout(performScroll, 320);
+        if (wasOpen) {
+            closeMobileMenu();
+            window.setTimeout(() => scrollToSectionElement(ref.current), 280);
             return;
         }
 
-        window.requestAnimationFrame(() => {
-            window.requestAnimationFrame(performScroll);
-        });
+        scrollToSectionElement(ref.current);
     };
 
     const handleNavClick = (event, ref) => {
@@ -58,9 +38,13 @@ const NavBar = ({scrollRefs}) => {
     };
 
     const handleScroll = () => {
-        const scrollAnchor = window.scrollY + (window.innerHeight * 0.35);
+        const headerOffset = parseFloat(
+            getComputedStyle(document.documentElement).getPropertyValue('--section-header-offset')
+        ) || 120;
+        const scrollAnchor = window.scrollY + headerOffset + 24;
         const sections = Object.entries(scrollRefs);
         let currentSection = '';
+
         for (const [key, ref] of sections) {
             if (ref.current) {
                 const offsetTop = ref.current.offsetTop;
@@ -70,18 +54,27 @@ const NavBar = ({scrollRefs}) => {
                 }
             }
         }
+
         setActiveSection(currentSection);
     };
 
     const updateHeaderOffset = useCallback(() => {
-        const wrapper = document.querySelector('.navbar-wrapper');
-        if (wrapper) {
-            document.documentElement.style.setProperty(
-                '--section-header-offset',
-                `${wrapper.offsetHeight}px`
-            );
-        }
+        updateSectionHeaderOffset();
     }, []);
+
+    useEffect(() => {
+        updateHeaderOffset();
+
+        if (document.fonts?.ready) {
+            document.fonts.ready.then(updateHeaderOffset);
+        }
+
+        window.addEventListener('load', updateHeaderOffset);
+
+        return () => {
+            window.removeEventListener('load', updateHeaderOffset);
+        };
+    }, [updateHeaderOffset]);
 
     useEffect(() => {
         window.addEventListener('scroll', handleScroll);
@@ -95,7 +88,6 @@ const NavBar = ({scrollRefs}) => {
         updateHeaderOffset();
 
         const wrapper = document.querySelector('.navbar-wrapper');
-        const collapse = document.getElementById('navbarNav');
         if (!wrapper) return;
 
         const resizeObserver = new ResizeObserver(() => {
@@ -104,30 +96,17 @@ const NavBar = ({scrollRefs}) => {
         });
         resizeObserver.observe(wrapper);
 
-        const handleResize = () => updateHeaderOffset();
-        window.addEventListener('resize', handleResize);
-
-        const markAnimating = () => {
-            isNavbarAnimatingRef.current = true;
-        };
-
-        const finishAnimating = () => {
-            isNavbarAnimatingRef.current = false;
+        const handleResize = () => {
+            if (window.innerWidth >= 1200) {
+                setIsMobileMenuOpen(false);
+            }
             updateHeaderOffset();
         };
-
-        collapse?.addEventListener('show.bs.collapse', markAnimating);
-        collapse?.addEventListener('hide.bs.collapse', markAnimating);
-        collapse?.addEventListener('shown.bs.collapse', finishAnimating);
-        collapse?.addEventListener('hidden.bs.collapse', finishAnimating);
+        window.addEventListener('resize', handleResize);
 
         return () => {
             resizeObserver.disconnect();
             window.removeEventListener('resize', handleResize);
-            collapse?.removeEventListener('show.bs.collapse', markAnimating);
-            collapse?.removeEventListener('hide.bs.collapse', markAnimating);
-            collapse?.removeEventListener('shown.bs.collapse', finishAnimating);
-            collapse?.removeEventListener('hidden.bs.collapse', finishAnimating);
         };
     }, [updateHeaderOffset]);
 
@@ -140,8 +119,14 @@ const NavBar = ({scrollRefs}) => {
     };
 
     return (
-        <header className="navbar-wrapper">
-            <Navbar expand="xl" className="portfolio-navbar" aria-label={t.a11y.navLabel}>
+        <header className={`navbar-wrapper${isMobileMenuOpen ? ' navbar-wrapper--menu-open' : ''}`}>
+            <Navbar
+                expand="xl"
+                className="portfolio-navbar"
+                aria-label={t.a11y.navLabel}
+                expanded={isMobileMenuOpen}
+                onToggle={setIsMobileMenuOpen}
+            >
                 <img src={Logo} id="logo1" alt={t.a11y.logoAlt} />
                 <span id="logo2">
                     <span>PORTFOLIO</span>

@@ -1,11 +1,9 @@
 .main-section-3 {
     min-height: var(--viewport-height);
-    height: var(--viewport-height);
     background-color: var(--color-accent);
     display: flex;
     flex-direction: column;
-    overflow-x: hidden;
-    overflow-y: hidden;
+    overflow: visible;
     box-sizing: border-box;
 }
 
@@ -58,7 +56,7 @@
     line-height: 1.6;
     flex-shrink: 1;
     min-height: 0;
-    overflow-y: auto;
+    overflow: visible;
 }
 
 .graphic-designs-description-outside {

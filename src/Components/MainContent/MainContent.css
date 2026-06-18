@@ -6,13 +6,11 @@
 .MainSite > section {
     min-height: var(--viewport-height);
     opacity: 0;
-    transform: translateY(28px);
-    transition: opacity var(--transition-slow), transform var(--transition-slow);
+    transition: opacity var(--transition-slow);
 }
 
 .MainSite > section.is-visible {
     opacity: 1;
-    transform: translateY(0);
 }
 
 .MainSite > section.is-visible h2 {
@@ -43,7 +41,6 @@
 @media (prefers-reduced-motion: reduce) {
     .MainSite > section {
         opacity: 1;
-        transform: none;
         transition: none;
     }
 

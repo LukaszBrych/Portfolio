@@ -1,9 +1,8 @@
 .main-section-4 {
     min-height: var(--viewport-height);
-    height: var(--viewport-height);
     display: flex;
     flex-direction: column;
-    overflow: hidden;
+    overflow: visible;
     box-sizing: border-box;
     background-color: var(--color-bg);
 }
@@ -23,8 +22,7 @@
     width: 100%;
     padding: clamp(1rem, 3vh, 2.5rem) var(--section-padding-x);
     background-color: var(--color-bg);
-    overflow-y: auto;
-    -webkit-overflow-scrolling: touch;
+    overflow: visible;
 }
 
 .main-section-4 .down-panel {
